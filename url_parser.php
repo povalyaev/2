@@ -17,9 +17,10 @@ function extract_subdomains($domain)
     return $subdomains;
 }
 
-function urlParse($argv)
+function urlParse($url)
 {
-    $parseUrl = parse_url($argv);
+    $parseUrl = parse_url($url);
+
     $sub = extract_subdomains($parseUrl['host']);
     
     if ($sub == true) {
@@ -29,10 +30,40 @@ function urlParse($argv)
         $host = str_ireplace($sub,'',$parseUrl['host']);
     }
     $domain = strstr($host, '.');
-    $tld = ltrim(strstr($host, '.'), '.');
+    $tld = strstr($host, '.');
     $parseUrl += ['domain'=>"$host"];
     $parseUrl += ['tld'=>"$tld"];
-    var_export($parseUrl);
+    print_r(json_encode($parseUrl, 128));
+    echo PHP_EOL;
+
+    if (isset($parseUrl['query'])) {
+	$get_string = $parseUrl['query'];
+	parse_str($get_string, $get_array);
+	print_r(json_encode($get_array, 128));
+	echo PHP_EOL;
+    }
 }
 
-urlParse($argv);
+
+	$opt = "u:";
+	$ogopt =array(
+        "url:",
+	);
+        $opts = getopt($opt, $ogopt);
+
+	if ($opts) {
+	foreach (array_keys($opts) as $opt) switch ($opt) 
+	{
+            case 'u':
+            $url = $opts['u'];
+            break;
+            case 'url':
+            $url = $opts['url'];
+            break;
+	}
+	} else {
+	    $url = $argv[1];
+	}
+
+ 	urlParse($url);
+
