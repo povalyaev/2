@@ -19,19 +19,20 @@ function extract_subdomains($domain)
 
 function urlParse($argv)
 {
-$parseUrl = parse_url($argv);
-$sub = extract_subdomains($parseUrl['host']);
+    $parseUrl = parse_url($argv);
+    $sub = extract_subdomains($parseUrl['host']);
+    
     if ($sub == true) {
         $host = str_ireplace($sub .'.','',$parseUrl['host']);
         $parseUrl += ['subdomain'=>"$sub"];
     } else {
         $host = str_ireplace($sub,'',$parseUrl['host']);
     }
-$domain = strstr($host, '.');
-$tld = ltrim(strstr($host, '.'), '.');
-$parseUrl += ['domain'=>"$host"];
-$parseUrl += ['tld'=>"$tld"];
-var_export($parseUrl);
+    $domain = strstr($host, '.');
+    $tld = ltrim(strstr($host, '.'), '.');
+    $parseUrl += ['domain'=>"$host"];
+    $parseUrl += ['tld'=>"$tld"];
+    var_export($parseUrl);
 }
 
 urlParse($argv);
