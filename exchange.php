@@ -1,9 +1,9 @@
 <?php
-function bankomat($argv)
+function bankomat($cash)
 {
-foreach ($argv as $cash)
-{
-	if ($cash < 100000) {
+	if (ctype_digit($cash) === false) {
+		echo "Invalid number" . PHP_EOL;
+	} elseif ($cash < 100000) {
     	$banknote = array(500, 200, 100, 50, 20, 10, 5, 2, 1);
     	$banknoteCounter = array(0, 0, 0, 0, 0, 0, 0, 0, 0);
 
@@ -25,6 +25,5 @@ foreach ($argv as $cash)
 		echo "Maximum value - 100000 UAH" . PHP_EOL;
 	}
 }
-}
-
-bankomat($argv);
+$cash = $argv[1];
+bankomat($cash);
