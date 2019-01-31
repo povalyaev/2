@@ -1,5 +1,7 @@
 <?php
-function countCurrency($cash)
+function bankomat($argv)
+{
+foreach ($argv as $cash)
 {
 	if ($cash < 100000) {
     	$banknote = array(500, 200, 100, 50, 20, 10, 5, 2, 1);
@@ -9,20 +11,20 @@ function countCurrency($cash)
     		{
         		if ($cash >= $banknote[$i]) {
            		$banknoteCounter[$i] = intval($cash / $banknote[$i]);
-            	$cash = $cash - $banknoteCounter[$i] * $banknote[$i];
+            		$cash = $cash - $banknoteCounter[$i] * $banknote[$i];
        	 		}
     		}
 
     		for ($i = 0; $i < 9; $i++)
-   			{
+   		{
       			if ($banknoteCounter[$i] != 0) {
-            	echo $banknote[$i] . ': ' . $banknoteCounter[$i] . PHP_EOL;
+            		echo $banknote[$i] . ': ' . $banknoteCounter[$i] . PHP_EOL;
         		}
     		}
 	} else {
-		echo "Maximum value - 100000 UAH";
+		echo "Maximum value - 100000 UAH" . PHP_EOL;
 	}
 }
+}
 
-$cash = 1234;
-countCurrency($cash);
+bankomat($argv);
