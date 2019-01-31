@@ -55,7 +55,7 @@ function urlParse($url)
 
 
 	$opt = "u:";
-	$ogopt =array(
+	$ogopt = array(
         "url:",
 	);
         $opts = getopt($opt, $ogopt);
