@@ -19,16 +19,17 @@ function extract_subdomains($domain)
 
 function urlParse($url)
 {
+    if (filter_var($url, FILTER_VALIDATE_URL)) {
     $parseUrl = parse_url($url);
-
     $sub = extract_subdomains($parseUrl['host']);
     
-    if ($sub == true) {
-        $host = str_ireplace($sub .'.','',$parseUrl['host']);
-        $parseUrl += ['subdomain'=>"$sub"];
-    } else {
-        $host = str_ireplace($sub,'',$parseUrl['host']);
-    }
+    	if ($sub == true) {
+       	    $host = str_ireplace($sub .'.','',$parseUrl['host']);
+            $parseUrl += ['subdomain'=>"$sub"];
+    	} else {
+            $host = str_ireplace($sub,'',$parseUrl['host']);
+    	}
+
     $domain = strstr($host, '.');
     $tld = strstr($host, '.');
     $parseUrl += ['domain'=>"$host"];
@@ -36,11 +37,14 @@ function urlParse($url)
     print_r(json_encode($parseUrl, 128));
     echo PHP_EOL;
 
-    if (isset($parseUrl['query'])) {
-	$get_string = $parseUrl['query'];
-	parse_str($get_string, $get_array);
-	print_r(json_encode($get_array, 128));
-	echo PHP_EOL;
+   	 if (isset($parseUrl['query'])) {
+	    $get_string = $parseUrl['query'];
+	    parse_str($get_string, $get_array);
+	    print_r(json_encode($get_array, 128));
+	    echo PHP_EOL;
+    	 }
+    } else {
+    	echo("$url is a not valid URL!") . PHP_EOL;
     }
 }
 
@@ -66,4 +70,3 @@ function urlParse($url)
 	}
 
  	urlParse($url);
-
