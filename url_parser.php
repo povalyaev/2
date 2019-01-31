@@ -20,6 +20,7 @@ function extract_subdomains($domain)
 function urlParse($url)
 {
     if (filter_var($url, FILTER_VALIDATE_URL)) {
+    $extension = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION);
     $parseUrl = parse_url($url);
     $sub = extract_subdomains($parseUrl['host']);
     
@@ -28,6 +29,10 @@ function urlParse($url)
             $parseUrl += ['subdomain'=>"$sub"];
     	} else {
             $host = str_ireplace($sub,'',$parseUrl['host']);
+    	}
+
+	if ($extension == true) {
+	    $parseUrl += ['extension'=>"$extension"];
     	}
 
     $domain = strstr($host, '.');
