@@ -38,7 +38,7 @@ function mergeSoft(&$A, $p, $r)
         mergeSoft($A, $p, $q);
         mergeSoft($A, $q + 1, $r);
         merge($A, $p, $q, $r);
-	}
+    }
 }
 
 mergeSoft($A, 0, count($A) - 1);
