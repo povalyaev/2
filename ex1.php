@@ -2,13 +2,13 @@
 
 class student
 {
-    public $firstname;
-    public $lastname;
-    public $gender;
-    public $status;
-    public $gpa;
+    private $firstname;
+    private $lastname;
+    private $gender;
+    private $status;
+    private $gpa;
 
-    function __construct($firstname, $lastname, $gender, $status, $gpa) 
+    function __construct($firstname, $lastname, $gender, $status, $gpa)
     {
         $this->firstname = $firstname;
         $this->lastname = $lastname;
@@ -17,24 +17,21 @@ class student
         $this->gpa = (float)$gpa;
     }
 
-    public function showMyself()
+    function showMyself()
     {
         var_export(get_object_vars($this));
     }
 
-    /**
-     * @param $gpa
-     * @param $study_time
-     */
-    public function StudyTime($gpa, $study_time)
+    function studyTime($study_time)
     {
-        $gpa = $gpa + log($study_time);
-        if ($gpa > '4') {
-            $gpa = '4.00';
+        $this->gpa = $this->gpa + log($study_time / 60);
+
+        if ($this->gpa > 4) {
+            $this->gpa = 4.0;
         }
-        var_export(get_object_vars($this));
-    }
 
+        $this->showMyself();
+    }
 }
 
 $obj = [];
@@ -44,14 +41,13 @@ $obj[2] = new student("Jack", "Indabox", "male", "junior", 2.5);
 $obj[3] = new student("Jane", "Miller", "female", "senior", 3.6);
 $obj[4] = new student("Mary", "Scott", "female", "senior", 2.7);
 
-foreach ($obj as $i => $j) {
-    echo $j->showMyself() . PHP_EOL;
+foreach ($obj as $key => $value) {
+    echo PHP_EOL . $value->showMyself();
 }
 
 $study_time = [60, 100, 40, 300, 1000];
+echo  PHP_EOL, "Student with new gpa: ", PHP_EOL;
 
-foreach ($obj as $q => $w) {
-    for ($i = 0; $i < 5; $i++) {
-        echo $w->StudyTime($obj[$i]->gpa, $study_time[$i]) . PHP_EOL;
-    }
+foreach ($obj as $key => $value) {
+    echo PHP_EOL . $value->studyTime($study_time[$key]);
 }
