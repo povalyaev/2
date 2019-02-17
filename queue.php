@@ -3,11 +3,11 @@
 class stack
 {
     private $top = 0;
-    private $mest = [];
+    private $hranilishche = [];
 
     public function in($value)
     {
-        $this->mest[$this->top++] = $value;
+        $this->hranilishche[$this->top++] = $value;
     }
 
     public function out()
@@ -15,7 +15,7 @@ class stack
         if($this->isEmpty()) {
             throw new RuntimeException("Stack is empty!");
         }
-        return $this->mest[--$this->top];
+        return $this->hranilishche[--$this->top];
     }
 
     public function isEmpty()
@@ -23,7 +23,6 @@ class stack
         return $this->top === 0;
     }
 }
-
 
 class queue
 {
@@ -58,7 +57,6 @@ class queue
         return ($this->oneStack && $this->twoStack) === 0;
     }
 }
-
 $obj = new queue();
 
 foreach (range(0, 15) as $number) {
