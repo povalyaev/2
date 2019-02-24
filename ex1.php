@@ -91,11 +91,7 @@ class student
      */
     public function setGpa($gpa): void
     {
-        if ($gpa >= 0 && $gpa <= 4.0){
-            $this->gpa = $gpa;
-        } else {
-            $this->gpa = 4.0;
-        }
+        $this->gpa = $gpa;
     }
 
     function showMyself()
