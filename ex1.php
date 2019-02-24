@@ -8,13 +8,94 @@ class student
     private $status;
     private $gpa;
 
-    function __construct($firstname, $lastname, $gender, $status, $gpa)
+    function __construct($firstname, $lastname, $gender, $status, $gpa) {
+        $this->setFirstname($firstname);
+        $this->setLastname($lastname);
+        $this->setGender($gender);
+        $this->setStatus($status);
+        $this->setGpa($gpa);
+    }
+    /**
+     * @return mixed
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+    /**
+     * @param mixed $firstname
+     */
+    public function setFirstname($firstname) : void
     {
         $this->firstname = $firstname;
+    }
+    /**
+     * @return mixed
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+    /**
+     * @param mixed $lastname
+     */
+    public function setLastname($lastname): void
+    {
         $this->lastname = $lastname;
-        $this->gender = $gender;
-        $this->status = $status;
-        $this->gpa = (float)$gpa;
+    }
+    /**
+     * @return mixed
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+    /**
+     * @param mixed $gender
+     */
+    public function setGender($gender): void
+    {
+        if ($gender === 'male' || $gender === 'female'){
+            $this->gender = $gender;
+        } else {
+            throw new RuntimeException("Wrong gender type!");
+        }
+    }
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status): void
+    {
+        if ($status === 'freshman' || $status === 'sophomore' || $status === 'junior' || $status === 'senior'){
+            $this->status = $status;
+        } else {
+            throw new RuntimeException("Wrong status type!");
+        }
+    }
+    /**
+     * @return mixed
+     */
+    public function getGpa()
+    {
+        return $this->gpa;
+    }
+    /**
+     * @param mixed $gpa
+     */
+    public function setGpa($gpa): void
+    {
+        if ($gpa >= 0 && $gpa <= 4.0){
+            $this->gpa = $gpa;
+        } else {
+            $this->gpa = 4.0;
+        }
     }
 
     function showMyself()
